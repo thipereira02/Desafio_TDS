@@ -1,7 +1,7 @@
 package com.thiago.urlshortener.controllers;
 
 import com.thiago.urlshortener.services.UrlService;
-import com.thiago.urlshortener.util.UrlValidator;
+import com.thiago.urlshortener.utils.UrlValidator;
 import com.thiago.urlshortener.dto.UrlRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;

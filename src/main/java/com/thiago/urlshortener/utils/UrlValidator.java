@@ -1,4 +1,4 @@
-package com.thiago.urlshortener.util;
+package com.thiago.urlshortener.utils;
 
 public class UrlValidator {
     private static final String URL_REGEX = "^(http|https)://[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
