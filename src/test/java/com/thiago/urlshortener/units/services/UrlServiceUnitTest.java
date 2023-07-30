@@ -4,6 +4,7 @@ import com.thiago.urlshortener.repositories.UrlRepository;
 import com.thiago.urlshortener.services.ShorteningStrategy;
 import com.thiago.urlshortener.services.UrlService;
 import com.thiago.urlshortener.entities.UrlEntity;
+import com.thiago.urlshortener.units.services.mocks.MockUtils;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,20 +40,11 @@ public class UrlServiceUnitTest {
         String shortUrl = "http://encurte.com/abc12";
 
         when(shorteningStrategy.generateShortUrl()).thenReturn("abc12");
-        when(urlRepository.save(any(UrlEntity.class))).thenReturn(mockUrlEntity(shortUrl));
+        when(urlRepository.save(any(UrlEntity.class))).thenReturn(MockUtils.mockUrlEntity(shortUrl));
 
         String result = urlService.shortenUrl(originalUrl);
 
         assertEquals(shortUrl, result);
 
-    }
-
-    private UrlEntity mockUrlEntity(String shortUrl) {
-        UrlEntity urlEntity = new UrlEntity();
-        urlEntity.setOriginalUrl("http://www.example.com");
-        urlEntity.setShortUrl(shortUrl);
-        urlEntity.setClicks(0);
-        urlEntity.setLastClickAt(null);
-        return urlEntity;
     }
 }
