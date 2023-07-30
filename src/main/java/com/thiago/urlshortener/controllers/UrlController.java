@@ -35,14 +35,14 @@ public class UrlController {
     }
 
     @GetMapping("/{urlEncurtada}")
-    public void redirect(@PathVariable String urlEncurtada, HttpServletResponse response) throws IOException {
-        String originalUrl = urlService.getOriginalUrl(urlEncurtada);
+    public void redirect(@PathVariable String shortenUrl, HttpServletResponse response) throws IOException {
+        String originalUrl = urlService.getOriginalUrl(shortenUrl);
         if (originalUrl == null) {
             response.sendError(HttpStatus.NOT_FOUND.value());
             return;
         }
 
-        urlService.updateUrlStatistics(urlEncurtada);
+        urlService.updateUrlStatistics(shortenUrl);
 
         response.sendRedirect(originalUrl);
     }

@@ -32,13 +32,13 @@ public class UrlService {
         return shortUrl;
     }
 
-    public String getOriginalUrl(String shortUrl) {
-        UrlEntity urlEntity = urlRepository.findByShortUrl(shortUrl);
+    public String getOriginalUrl(String shortenUrl) {
+        UrlEntity urlEntity = urlRepository.findByShortUrl(shortenUrl);
         return (urlEntity != null) ? urlEntity.getOriginalUrl() : null;
     }
 
-    public void updateUrlStatistics(String shortUrl) {
-        UrlEntity urlEntity = urlRepository.findByShortUrl(shortUrl);
+    public void updateUrlStatistics(String shortenUrl) {
+        UrlEntity urlEntity = urlRepository.findByShortUrl(shortenUrl);
         if (urlEntity != null) {
             urlEntity.setClicks(urlEntity.getClicks() + 1);
             urlEntity.setLastClickAt(LocalDateTime.now());
