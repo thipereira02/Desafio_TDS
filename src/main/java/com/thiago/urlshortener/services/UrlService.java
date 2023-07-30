@@ -3,6 +3,8 @@ package com.thiago.urlshortener.services;
 import com.thiago.urlshortener.entities.UrlEntity;
 import com.thiago.urlshortener.repositories.UrlRepository;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,19 @@ public class UrlService {
         urlRepository.save(urlEntity);
 
         return shortUrl;
+    }
+
+    public String getOriginalUrl(String shortUrl) {
+        UrlEntity urlEntity = urlRepository.findByShortUrl(shortUrl);
+        return (urlEntity != null) ? urlEntity.getOriginalUrl() : null;
+    }
+
+    public void updateUrlStatistics(String shortUrl) {
+        UrlEntity urlEntity = urlRepository.findByShortUrl(shortUrl);
+        if (urlEntity != null) {
+            urlEntity.setClicks(urlEntity.getClicks() + 1);
+            urlEntity.setLastClickAt(LocalDateTime.now());
+            urlRepository.save(urlEntity);
+        }
     }
 }
