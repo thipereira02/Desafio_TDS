@@ -3,7 +3,7 @@ package com.thiago.urlshortener.controllers;
 import com.thiago.urlshortener.services.UrlService;
 import com.thiago.urlshortener.utils.UrlValidator;
 
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 import com.thiago.urlshortener.dto.UrlRequest;
 
