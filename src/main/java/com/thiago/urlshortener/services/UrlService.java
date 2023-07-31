@@ -1,9 +1,12 @@
 package com.thiago.urlshortener.services;
 
 import com.thiago.urlshortener.entities.UrlEntity;
+import com.thiago.urlshortener.entities.UrlStatistics;
 import com.thiago.urlshortener.repositories.UrlRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +47,15 @@ public class UrlService {
             urlEntity.setLastClickAt(LocalDateTime.now());
             urlRepository.save(urlEntity);
         }
+    }
+
+    public List<UrlStatistics> getStatistics() {
+        return urlRepository.findAll().stream()
+            .map(urlEntity -> new UrlStatistics(
+                    urlEntity.getShortUrl(),
+                    (int) urlEntity.getClicks(),
+                    urlEntity.getLastClickAt()
+            ))
+            .collect(Collectors.toList());
     }
 }

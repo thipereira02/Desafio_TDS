@@ -6,6 +6,8 @@ import com.thiago.urlshortener.utils.UrlValidator;
 import javax.servlet.http.HttpServletResponse;
 
 import com.thiago.urlshortener.dto.UrlRequest;
+import com.thiago.urlshortener.dto.UrlStatisticsResponse;
+import com.thiago.urlshortener.entities.UrlStatistics;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class UrlController {
@@ -45,5 +48,15 @@ public class UrlController {
         urlService.updateUrlStatistics(shortenUrl);
 
         response.sendRedirect(originalUrl);
+    }
+
+    @GetMapping("/estatisticas")
+    public ResponseEntity<UrlStatisticsResponse> getStatistics() {
+        List<UrlStatistics> urlStatisticsList = urlService.getStatistics();
+        if (urlStatisticsList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(new UrlStatisticsResponse(urlStatisticsList));
     }
 }
