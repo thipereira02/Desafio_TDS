@@ -14,6 +14,16 @@ public class UrlEntity {
     private String id;
     private String originalUrl;
     private String shortUrl;
-    private long clicks;
+    private int clicks;
     private LocalDateTime lastClickAt;
+
+    public UrlEntity() {
+    }
+
+    public UrlEntity(String originalUrl, String shortUrl, int clicks, LocalDateTime lastClickAt) {
+        this.originalUrl = originalUrl;
+        this.shortUrl = shortUrl;
+        this.clicks = clicks;
+        this.lastClickAt = lastClickAt;
+    }
 }

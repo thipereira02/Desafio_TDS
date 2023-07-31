@@ -53,7 +53,7 @@ public class UrlService {
         return urlRepository.findAll().stream()
             .map(urlEntity -> new UrlStatistics(
                     urlEntity.getShortUrl(),
-                    (int) urlEntity.getClicks(),
+                    urlEntity.getClicks(),
                     urlEntity.getLastClickAt()
             ))
             .collect(Collectors.toList());
